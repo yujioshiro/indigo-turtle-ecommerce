@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model OrderItem {
+  id        Int      @id(map: "Order_Items_pk") @default(autoincrement()) @map("oi_id")
+  orderId   Int      @map("order_id")
+  prodId    Int      @map("prod_id")
+  quantity  Int
+  total     Decimal  @db.Decimal(10, 2)
+  createdAt DateTime @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime @map("updated_at") @db.Timestamp(6)
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Order_Items_Orders_order_id_fk")
+  product   Product  @relation(fields: [prodId], references: [id], onDelete: NoAction, map: "Order_Items_Products_prod_id_fk")
+
+  @@map("Order_Items")
+}
+
+model Order {
+  userId    Int?        @map("user_id")
+  total     Decimal     @db.Decimal(10, 2)
+  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime    @default(now()) @map("updated_at") @db.Timestamp(6)
+  id        Int         @id(map: "Orders_pk") @default(autoincrement()) @map("order_id")
+  orderItem OrderItem[]
+  user      User?       @relation(fields: [userId], references: [id], map: "Orders_Users_user_id_fk")
+
+  @@map("Orders")
+}
+
+model Product {
+  name        String
+  description String?
+  price       Decimal     @db.Decimal(10, 2)
+  quantity    Int
+  userId      Int?        @map("user_id")
+  image       String?
+  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt   DateTime    @default(now()) @map("updated_at") @db.Timestamp(6)
+  id          Int         @id(map: "Products_pk") @default(autoincrement()) @map("prod_id")
+  orderItems  OrderItem[]
+  user        User?       @relation(fields: [userId], references: [id], map: "Products_Users_user_id_fk")
+
+  @@map("Products")
+}
+
+model User {
+  firstName String    @map("first_name") @db.VarChar(60)
+  lastName  String    @map("last_name") @db.VarChar(60)
+  email     String    @unique(map: "Users_pk2") @db.VarChar(50)
+  password  String
+  address   String
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime  @default(now()) @map("updated_at") @db.Timestamp(6)
+  id        Int       @id(map: "Users_pk") @default(autoincrement()) @map("user_id")
+  orders    Order[]
+  products  Product[]
+
+  @@map("Users")
+}
