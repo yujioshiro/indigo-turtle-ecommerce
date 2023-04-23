@@ -50,7 +50,7 @@ model Product {
 }
 
 model User {
-  username  String    @db.VarChar(60)
+  username  String    @unique(map: "Users_pk3") @db.VarChar(60)
   email     String    @unique(map: "Users_pk2") @db.VarChar(50)
   password  String
   address   String
