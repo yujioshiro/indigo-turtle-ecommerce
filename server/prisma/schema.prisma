@@ -13,8 +13,8 @@ model OrderItem {
   prodId    Int      @map("prod_id")
   quantity  Int
   total     Decimal  @db.Decimal(10, 2)
-  createdAt DateTime @map("created_at") @db.Timestamp(6)
-  updatedAt DateTime @map("updated_at") @db.Timestamp(6)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamp(6)
   order     Order    @relation(fields: [orderId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Order_Items_Orders_order_id_fk")
   product   Product  @relation(fields: [prodId], references: [id], onDelete: NoAction, map: "Order_Items_Products_prod_id_fk")
 
@@ -50,8 +50,7 @@ model Product {
 }
 
 model User {
-  firstName String    @map("first_name") @db.VarChar(60)
-  lastName  String    @map("last_name") @db.VarChar(60)
+  username  String    @unique(map: "Users_pk3") @db.VarChar(60)
   email     String    @unique(map: "Users_pk2") @db.VarChar(50)
   password  String
   address   String
