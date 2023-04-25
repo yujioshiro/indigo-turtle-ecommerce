@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Indigo Turtle Ecommerce',
-  tagline: 'Let\'s goooooooo!',
+  title: 'IndigoList',
+  tagline: 'Ecommerce site for Hack Weekly - Indigo Turtle',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
