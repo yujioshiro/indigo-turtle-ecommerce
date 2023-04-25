@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { NewEntryUser } from '../types/authTypes';
 
 export const registerSchema = z
   .object({
@@ -13,7 +12,7 @@ export const registerSchema = z
     path: ['password'],
     message: 'Password and Password confirmation do not match',
   })
-  .transform((data): NewEntryUser => {
+  .transform((data) => {
     return {
       username: data.username,
       email: data.email,
