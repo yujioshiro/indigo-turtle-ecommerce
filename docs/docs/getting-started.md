@@ -27,5 +27,5 @@ All work performed should follow our standards as close as possible. If a docume
 
 We are currently in the MVP section of the project. Take a look at <a href="/docs/category/mvp-requirements">the MVP requirements</a>.
 
-Feel free to also take on <a href="/docs/stretch-goals.md">the stretch goals</a>.
+Feel free to also take on <a href="/docs/stretch-goals">the stretch goals</a>.
 You can also look at 
