@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { registerSchema } from '../validation/authSchema';
-import prisma from '../prisma';
-import { NewEntryUser } from '../types/authTypes';
-import { excludeFields } from '../utils/prismaUtils';
+import { registerSchema } from '../../validation/authSchema';
+import prisma from '../../prisma';
+import { excludeFields } from '../../utils/prismaUtils';
 import bcrypt from 'bcrypt';
+import config from '../../config/config';
 
 export const register = async (req: Request, res: Response) => {
   const parsedUser = registerSchema.safeParse(req.body);
@@ -12,7 +12,7 @@ export const register = async (req: Request, res: Response) => {
     return res.status(400).json({ errors: parsedUser.error.issues });
   }
 
-  const toBeRegistered: NewEntryUser = parsedUser.data;
+  const toBeRegistered = parsedUser.data;
 
   const duplicateUsers = await prisma.user.findMany({
     where: {
@@ -27,13 +27,13 @@ export const register = async (req: Request, res: Response) => {
     },
   });
 
-  if (duplicateUsers.length > 0) {
+  if (duplicateUsers.length) {
     return res.status(409).json({ error: 'Username or email already used' });
   }
 
   const passwordHash = await bcrypt.hash(
     toBeRegistered.password,
-    Number(process.env.SALT_ROUNDS)
+    config.SALT_ROUNDS
   );
 
   const newUser = await prisma.user.create({
