@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("PRISMA_DATABASE_URL")
 }
 
 model OrderItem {
@@ -51,7 +51,7 @@ model Product {
 
 model User {
   username  String    @unique(map: "Users_pk3") @db.VarChar(60)
-  email     String    @unique(map: "Users_pk2") @db.VarChar(50)
+  email     String    @unique(map: "Users_pk2") @db.VarChar(50) 
   password  String
   address   String
   createdAt DateTime  @default(now()) @map("created_at") @db.Timestamp(6)
