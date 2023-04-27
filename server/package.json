@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts",
     "build": "webpack",
-    "start": "webpack --watch"
+    "start": "webpack --watch",
+    "start2": "npm run build && node ./dist/index.js",
+    "install2": "npm i && npx prisma generate"
   },
   "keywords": [],
   "author": "",

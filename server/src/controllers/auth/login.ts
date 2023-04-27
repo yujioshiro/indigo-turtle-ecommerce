@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 
-import { loginFieldSchema } from 'validation/loginSchema';
+import { loginFieldSchema } from '../../validation/loginSchema';
 
 export const login = async (req: Request, res: Response) => {
   const fields = loginFieldSchema().safeParse(req.body);

@@ -1,11 +1,20 @@
+import { Prisma, PrismaClient } from '@prisma/client';
+import passport from 'passport';
+
 import app from './app';
 import config from './config/envConfig';
+import { createUserStrategyConfig } from './config/createUserStrategyConfig';
 
 const { PORT } = config;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+(async () => {
+  const prisma = new PrismaClient();
+  passport.use(await createUserStrategyConfig(prisma));
+
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+})();
 
 // (async () => {
 //   const url = config.DATABASE_URL;
