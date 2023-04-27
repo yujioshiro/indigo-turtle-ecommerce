@@ -10,7 +10,7 @@ export default function Auth(): JSX.Element {
   
   return (
     <div className="Auth">
-      <div className="Container bg-purple-500">
+      <div className="Container bg-indigo-500">
         <h2>{isSignIn?'Sign In' : 'Sign up'}</h2>
         <div className="Toggle">
           <div

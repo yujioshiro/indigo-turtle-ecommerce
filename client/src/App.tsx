@@ -8,7 +8,7 @@ import ProductPage from './pages/ProductPage/ProductPage';
 
 function App(): JSX.Element {
   return (
-  <div className="App bg-indigo-500">
+  <div className="App">
     <Navbar />
     <Routes>
       <Route path="/" element={<HomePage />} />
