@@ -8,10 +8,11 @@ import ProductPage from './pages/ProductPage/ProductPage';
 
 function App(): JSX.Element {
   return (
-  <div className="App">
+  <div className="App bg-indigo-500">
     <Navbar />
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="Auth" element={<AuthPage />} />
       <Route path="AboutPage" element={<AboutPage />} />
       <Route path="AuthPage" element={<AuthPage />} />
       <Route path="ProductPage" element={<ProductPage />} />
