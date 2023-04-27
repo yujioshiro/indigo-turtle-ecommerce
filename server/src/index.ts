@@ -11,6 +11,16 @@ const { PORT } = config;
   const prisma = new PrismaClient();
   passport.use(await createUserStrategyConfig(prisma));
 
+  passport.serializeUser((user, done) => done(null, user));
+  passport.deserializeUser(async (email: string, done) => {
+    const user = (await prisma.user.findMany()).filter(
+      (user) => user.email === email
+    )[0];
+
+    if (user) return done(null, user);
+    else return done(null, { message: 'User not found' });
+  });
+
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
