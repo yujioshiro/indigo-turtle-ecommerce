@@ -5,8 +5,6 @@ const nodeExternals = require('webpack-node-externals');
 const mode = 'development';
 
 const config = {
-  watch: mode === 'development',
-
   mode: mode,
   target: 'node',
   entry: './src/index.ts',
