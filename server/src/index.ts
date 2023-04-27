@@ -1,16 +1,17 @@
-import { Prisma, PrismaClient } from '@prisma/client';
 import passport from 'passport';
 
-import app from './app';
+// Imports without function execution
 import config from './config/envConfig';
 import { createUserStrategyConfig } from './config/createUserStrategyConfig';
+
+// Imports with function execution
+import app from './app';
+import { prisma } from './utils/prisma';
 
 const { PORT } = config;
 
 (async () => {
-  const prisma = new PrismaClient();
-  passport.use(await createUserStrategyConfig(prisma));
-
+  passport.use(await createUserStrategyConfig());
   passport.serializeUser((user, done) => done(null, user));
   passport.deserializeUser(async (email: string, done) => {
     const user = (await prisma.user.findMany()).filter(

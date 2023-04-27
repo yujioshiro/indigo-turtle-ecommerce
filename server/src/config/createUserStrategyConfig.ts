@@ -1,13 +1,8 @@
-import { Prisma, PrismaClient } from '@prisma/client';
 import { Strategy } from 'passport-local';
 
-type PClient = PrismaClient<
-  Prisma.PrismaClientOptions,
-  never,
-  Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined
->;
+import { prisma } from '../utils/prisma';
 
-export const createUserStrategyConfig = async (prisma: PClient) => {
+export const createUserStrategyConfig = async () => {
   const users = await prisma.user.findMany();
 
   return new Strategy(
