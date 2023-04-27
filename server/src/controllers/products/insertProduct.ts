@@ -1,9 +1,9 @@
-import { Response } from 'express';
-import { AuthedRequest } from '../../types/auth';
+import { Request, Response } from 'express';
 import { insertProductSchema } from '../../validation/products/insertProductSchema';
 import prisma from '../../prisma';
+import { User } from '../../types/auth';
 
-export const insertProduct = async (req: AuthedRequest, res: Response) => {
+export const insertProduct = async (req: Request, res: Response) => {
   const parsedProduct = insertProductSchema.safeParse(req.body);
 
   if (!parsedProduct.success) {
@@ -11,7 +11,7 @@ export const insertProduct = async (req: AuthedRequest, res: Response) => {
   }
 
   const toInsert = parsedProduct.data;
-  const userId = req.user.id;
+  const userId = (req.user as User).id;
 
   const newProduct = await prisma.product.create({
     data: { ...toInsert, userId },
