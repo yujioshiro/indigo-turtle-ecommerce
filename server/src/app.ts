@@ -6,6 +6,7 @@ import loginRoute from '@/routes/loginRoute';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import checkoutRoute from '@/routes/checkoutRoute';
+import { strategy } from './middlewares/passport';
 
 const sessionOptions: SessionOptions = {
   secret: 'BlogSecret',
@@ -22,6 +23,7 @@ app.use(cookieParser());
 // passport
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(strategy);
 
 //routes
 app.use('/api/register', registrationRoute);
