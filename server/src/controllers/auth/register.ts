@@ -3,7 +3,7 @@ import { registerSchema } from '../../validation/authSchema';
 import prisma from '../../prisma';
 import { excludeFields } from '../../utils/prismaUtils';
 import bcrypt from 'bcrypt';
-import config from '../../config/config';
+import config from '../../config/envConfig';
 
 export const register = async (req: Request, res: Response) => {
   const parsedUser = registerSchema.safeParse(req.body);
