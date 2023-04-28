@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
     "target": "ES2020",
 
     "module": "CommonJS",
@@ -13,6 +12,13 @@
     "skipLibCheck": true,
     "sourceMap": true,
 
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "declaration": true,
+    "declarationDir": "build",
+    "declarationMap": true,
+
+    "paths": {
+      "@/*": ["*"]
+    }
   }
 }

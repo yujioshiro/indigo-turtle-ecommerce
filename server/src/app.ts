@@ -1,10 +1,11 @@
 import express from 'express';
 import session, { SessionOptions } from 'express-session';
-import registrationRoute from './routes/registrationRoute';
-import productsRoute from './routes/productsRouter';
-import loginRoute from './routes/loginRoute';
+import registrationRoute from '@/routes/registrationRoute';
+import productsRoute from '@/routes/productsRouter';
+import loginRoute from '@/routes/loginRoute';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
+import checkoutRoute from '@/routes/checkoutRoute';
 
 const sessionOptions: SessionOptions = {
   secret: 'BlogSecret',
@@ -24,7 +25,8 @@ app.use(passport.session());
 
 //routes
 app.use('/api/register', registrationRoute);
-app.use('/api/products/', productsRoute);
+app.use('/api/products', productsRoute);
 app.use('/api/login', loginRoute);
+app.use('/api/checkout', checkoutRoute);
 
 export default app;

@@ -31,6 +31,9 @@ export const register = async (req: Request, res: Response) => {
     return res.status(409).json({ error: 'Username or email already used' });
   }
 
+  if (config.SALT_ROUNDS === undefined)
+    return res.status(410).json({ error: 'Salt rounds not configured.' });
+
   const passwordHash = await bcrypt.hash(
     toBeRegistered.password,
     config.SALT_ROUNDS
