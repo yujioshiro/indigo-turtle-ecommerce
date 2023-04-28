@@ -9,6 +9,7 @@ const ONLINE_DATABASE_URL = process.env.ONLINE_DATABASE_URL;
 const PORT = process.env.PORT;
 const SALT_ROUNDS = Number(process.env.SALT_ROUNDS);
 const PUBLIC_ANON_KEY = process.env.PUBLIC_ANON_KEY;
+const SESSION_SECRET = process.env.SESSION_SECRET;
 
 export default {
   DATABASE_URL:
@@ -16,4 +17,5 @@ export default {
   PUBLIC_ANON_KEY,
   PORT,
   SALT_ROUNDS,
+  SESSION_SECRET,
 };
