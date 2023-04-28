@@ -27,7 +27,7 @@ export const strategy = new Strategy(
 );
 
 passport.serializeUser((user, done) => {
-  done((user as User).id);
+  done(null, (user as User).id);
 });
 
 passport.deserializeUser(async (id: number, done) => {
