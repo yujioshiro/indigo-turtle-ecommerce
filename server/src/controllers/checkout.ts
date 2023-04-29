@@ -7,15 +7,15 @@ import { checkoutSchema } from '@/validation/checkoutSchema';
 
 /*
 1. Authenticate request based on passport strategy. Check
-2. Deduct product quantity from db.
-3. Create recipe/confirmation of purchase by creating a new row in Order and Order_Items table.
-4. Request Stripe API to deduct total cost of order from credit card / debit card
+2. Request Stripe API to deduct total cost of order from credit card / debit card
+3. Deduct product quantity from db.
+4. Create recipe/confirmation of purchase by creating a new row in Order and Order_Items table.
 */
 
 interface Product {
   name: string;
-  quantity: string;
-  userId: string | null;
+  quantity: number;
+  id: number | null;
 }
 
 const createStripeSession = async (
@@ -27,7 +27,7 @@ const createStripeSession = async (
       return 'Error: Stripe Key not defined.';
     }
 
-    const stripeInstance = new Stripe(config.STRIPE_TEST_KEY, {
+    const stripe = new Stripe(config.STRIPE_TEST_KEY, {
       apiVersion: '2022-11-15',
     });
 
@@ -35,7 +35,7 @@ const createStripeSession = async (
 
     const stripeItems = prods.map((prod) => {
       const p = storeProducts.find(
-        (sProd) => sProd.name === prod.name && sProd.userId === prod.userId
+        (sProd) => sProd.name === prod.name && sProd.id === prod.id
       );
 
       if (p === undefined)
@@ -59,12 +59,15 @@ const createStripeSession = async (
       };
     });
 
-    return await stripeInstance.checkout.sessions.create({
+    return await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
       line_items: stripeItems,
       success_url: `${config.CLIENT_URL}/`,
       cancel_url: `${config.CLIENT_URL}/`,
+      metadata: {
+        product_ids: JSON.stringify(prods.map((prod) => prod.id)),
+      },
     });
   } catch (error) {
     console.error(error);
@@ -87,5 +90,5 @@ export const checkout = async (req: Request, res: Response) => {
   if (typeof session === 'string')
     return res.status(500).json({ errors: session });
 
-  return res.status(200).json('Updated');
+  return res.status(200).json({ url: session.url });
 };

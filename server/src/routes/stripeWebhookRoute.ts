@@ -1,9 +1,9 @@
 import express from 'express';
-import { checkout } from '@/controllers/checkout';
+import { stripeWebhook } from '@/controllers/stripeWebhook';
 import { isLoggedIn } from '@/middlewares/passport';
 
 const router = express.Router();
 
-router.post('/', isLoggedIn, checkout);
+router.post('/', stripeWebhook);
 
 export default router;
