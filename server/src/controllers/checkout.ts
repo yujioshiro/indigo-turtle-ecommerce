@@ -14,8 +14,8 @@ import { checkoutSchema } from '@/validation/checkoutSchema';
 
 interface Product {
   name: string;
-  quantity: string;
-  userId: string | null;
+  quantity: number;
+  userId: number | null;
 }
 
 const createStripeSession = async (
@@ -87,5 +87,5 @@ export const checkout = async (req: Request, res: Response) => {
   if (typeof session === 'string')
     return res.status(500).json({ errors: session });
 
-  return res.status(200).json('Updated');
+  return res.status(200).json({ url: session.url });
 };

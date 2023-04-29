@@ -29,4 +29,8 @@ export default {
       ? process.env.DEVELOPMENT_CLIENT_URL
       : process.env.PRODUCTION_CLIENT_URL,
   STRIPE_TEST_KEY,
+  STRIPE_WEBHOOK_SECRET:
+    mode === 'development'
+      ? process.env.STRIPE_CLI_WEBHOOK_SECRET
+      : process.env.STRIPE_TEST_WEBHOOK_SECRET,
 };
