@@ -41,8 +41,10 @@ export const stripeWebhook = async (req: Request, res: Response) => {
     return res.send(`Unknown event type: ${event.type}`);
   }
 
-  const checkoutSessionAsyncPaymentSucceeded = event.data.object;
-  console.log('hey\n\n');
+  const paymentSuccessData = event.data.object;
+  console.log(paymentSuccessData);
+  // TODO: Deduct product quantity from db.
+  // TODO: Create recipe/confirmation of purchase by creating a new row in Order and Order_Items table.
 
   return res.send();
 };
