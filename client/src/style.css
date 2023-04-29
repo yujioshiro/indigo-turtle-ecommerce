@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.Home-img{
+    display: flex;
+    width: 40px;
+    height: 40px;
+}
+
+.Home-nav{
+    display: flex;
+    background-color: blueviolet;
+    padding: 10px;
+    width: 100%;
+    height: 30px;
+}
+
+.Home-img{
+    display: flex;
+}
+
+.Home-navAboutUs{
+    display: flex;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    position: absolute;
+    left: 6%;
+  
+}
+.Home-navAboutUs:hover{
+    display: flex;
+    color: rgba(255, 255, 255, 0.436);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.Home-title{
+    color: white;
+    font-size: 30px;
+    display: flex;
+    position: absolute;
+    left: 45%;
+  
+}
+
+.Home-btn-signUp{
+    display: flex;
+    background-color: rgb(204, 253, 92);
+    border-radius: 10px;
+    font-size: 19px;
+    font-weight: bold;
+    position: absolute;
+    right: 2%
+}
+.Home-btn-signUp:hover{
+    display: flex;
+    background-color: rgb(255, 127, 127);
+    cursor: pointer;
+}
+
+.Home-btn-logIn{
+     display: flex;
+    background-color: rgb(204, 253, 92);
+    border-radius: 10px;
+    font-size: 19px;
+    font-weight: bold;
+    position: absolute;
+    right: 7%
+}
+.Home-btn-logIn:hover{
+    display: flex;
+    background-color: rgb(255, 127, 127);
+    cursor: pointer;
+}
