@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import './form.css';
 import axios, { AxiosResponse } from 'axios';
+import { Formik, Form, Field } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { useSelector,useDispatch } from 'react-redux';
+import store,{ selectUser,auth,logout } from '../../store';
+import type {UserState} from '../../store';
 
 export default function Auth(): JSX.Element {
+  
+  const userInfo = useSelector(selectUser);
+  console.log("Current user ",userInfo)
+  const dispatch = useDispatch();
   const [isSignIn, setIsSignIn] = useState<boolean>(true);
 
   interface SignUpValues {
   username: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  passwordConfirm: string;
+  address: string;
 }
 
   interface SignInValues {
@@ -20,29 +29,43 @@ export default function Auth(): JSX.Element {
 
   const navigate = useNavigate();
   const instance = axios.create({
-    baseURL: 'api',
+    baseURL: 'http://localhost:3001/api',
     withCredentials: true,
   });
 
-  const onSubmit = async (values: { isSignIn: boolean; SignInValues?: SignInValues; SignUpValues?: SignUpValues }): Promise<void> => {
-    const { isSignIn, SignInValues, SignUpValues } = values;
-
-    try { 
+  interface AuthFormValues {
+    username: string;
+    email?: string;
+    password: string;
+    passwordConfirm?: string;
+    address?: string;
+  }
+ 
+  const onSubmit = async (values:AuthFormValues): Promise<void> => {
+    
+    try {
+       
       {
       isSignIn?
       await instance.post('/login', {
-        username: SignInValues?.username,
-        password: SignInValues?.password,
+        username: values.username,
+        password: values.password,
       })
+      
       :
       await instance.post('/register', {
-        username: SignUpValues?.username,
-        email: SignUpValues?.email,
-        password: SignUpValues?.password,
+        username: values.username,
+        email: values.email,
+        password: values.password,
+        passwordConfirm: values.passwordConfirm,
+        address: values.address
       })
-      console.log("User registered successfully")
-      }
+    }
       
+      const payload:UserState = {username:values.username}
+      dispatch(auth(payload))
+
+      console.log("User registered successfully")
       navigate('/ProductPage');
     } catch (error) {
       console.error(error);
@@ -53,7 +76,22 @@ export default function Auth(): JSX.Element {
     setIsSignIn(!isSignIn);
   };
   
+  
   return (
+    <Formik
+        initialValues={{
+          username: '',
+          email: '',
+          password: '',
+          passwordConfirm: '',
+          address: ''
+        }}
+        onSubmit={async (values) => {
+          await onSubmit(values);
+        }}
+      >
+
+    {({ values, handleChange, handleBlur, handleSubmit }) => (
     <div className="Auth">
       <div className="Container bg-indigo-500">
         <h2>{isSignIn?'Sign In' : 'Sign up'}</h2>
@@ -67,39 +105,57 @@ export default function Auth(): JSX.Element {
             onClick={toggleSwitch}
           />
         </div>
-        <form>
+        <Form>
           <label>Username: </label>
-          <input type="text" />
+          <Field type="text" 
+                 name="username" 
+                 value={values.username} 
+                 onChange={handleChange} />
 
           {isSignIn ? null : (
             <>
-              <label>Email: </label>
-              <input type="text" />
+               <label>Email: </label>
+               <Field type="text" 
+                      name="email" 
+                      value={values.email} 
+                      onChange={handleChange} />
             </>
           )}
 
           <label>Password: </label>
-          <input type="password" />
+          <Field type="password" 
+                 name="password" 
+                 value={values.password} 
+                 onChange={handleChange} />
 
           {isSignIn ? null : (
             <>
               <label>Confirm Password: </label>
-              <input type="password" />
+              <Field
+                    type="password"
+                    name="passwordConfirm"
+                    value={values.passwordConfirm}
+                    onChange={handleChange} />
             </>
           )}
 
           {isSignIn ? null : (
             <>
               <label>Address: </label>
-              <input type="text" />
+              <Field type="text" 
+                     name="address" 
+                     value={values.address} 
+                     onChange={handleChange} />
             </>
           )}
 
           <div className="submit">
             <input type="submit" />
           </div>
-        </form>
+        </Form>
       </div>
     </div>
+    )}
+    </Formik>
   );
 }
