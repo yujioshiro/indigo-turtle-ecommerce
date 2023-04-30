@@ -1,27 +1,25 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { NavbarData } from './NavbarData';
+import React, { useState } from 'react';
 import TurtleLogo from './TurtleLogo.png';
+import { AboutUs, Account, Checkout, Home, SellProduct } from './NavbarData';
+import { FaAngleUp, FaShoppingCart } from 'react-icons/fa';
 
 export function Navbar(): JSX.Element {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <div className="p-2.5">
       <nav className="grid grid-flow-col">
         <div>
-          <span>
-            <NavLink to={'/HomePage'}>
-              <img src={TurtleLogo} alt="Turtle Logo" />
-            </NavLink>
-          </span>
-        </div>
-        <div>
-          {NavbarData.map((link, index) => {
-            return (
-              <div key={index}>
-                <NavLink to={link.path}>{link.name}</NavLink>
-              </div>
-            );
-          })}
+          <Home
+            image={<img src={TurtleLogo} alt="Turtle Logo" />}
+            path="./HomePage"
+          />
+          <SellProduct name="Sell Product" path="/ProductPage" />
+          <AboutUs name="About Us" path="/AboutPage" />
+          <span>IndigoList</span>
+          <Checkout icon={<FaShoppingCart />} path="/CheckoutPage" />
+          <Account user="" path="/AuthPage" />
+          <span><FaAngleUp /></span>
         </div>
       </nav>
     </div>

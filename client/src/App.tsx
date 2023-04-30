@@ -8,7 +8,19 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import { Provider } from 'react-redux'
 import store from './store';
 
+import data from "./data"
+
 function App(): JSX.Element {
+  /*
+  const DataJs = data.map(item => {
+    return(
+      <HomePage 
+          key={item.id}
+          item={item}
+    )
+  })
+  */
+ 
   return (
   <Provider store={store}>
   <div className="App">
@@ -24,5 +36,5 @@ function App(): JSX.Element {
   </Provider>
   )
 }
-
+/* <Navbar /> */ 
 export default App;

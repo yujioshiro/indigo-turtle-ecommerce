@@ -10,7 +10,7 @@ import type {UserState} from '../../store';
 export default function Auth(): JSX.Element {
   
   const userInfo = useSelector(selectUser);
-  console.log("Current user ",userInfo)
+  
   const dispatch = useDispatch();
   const [isSignIn, setIsSignIn] = useState<boolean>(true);
 
