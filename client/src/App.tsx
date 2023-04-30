@@ -5,27 +5,21 @@ import HomePage from './pages/HomePage/HomePage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import ProductPage from './pages/ProductPage/ProductPage';
-
+import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import data from "./data"
 
 function App(): JSX.Element {
-  const DataJs = data.map(item => {
-    return(
-      <HomePage 
-          key={item.id}
-          item={item}
-    )
-  })
- 
   return (
     <div className="App">
+      <Navbar />
       <Routes>
-        <Route path="AboutPage" element={<AboutPage />} />
-        <Route path="AuthPage" element={<AuthPage />} />
+        <Route path="HomePage" element={<HomePage />} />
         <Route path="ProductPage" element={<ProductPage />} />
+        <Route path="AboutPage" element={<AboutPage />} />
+        <Route path="CheckoutPage" element={<CheckoutPage />} />
+        <Route path="AuthPage" element={<AuthPage />} />
       </Routes>
 
-      <section>{DataJs}</section>
     </div>
   )
 }
