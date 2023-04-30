@@ -1,3 +1,10 @@
+interface User {
+    id?: string;
+    username: string;
+    email?: string;
+    password: string;
+    address?: string;
+  }
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import '@prisma/client';
@@ -36,3 +43,9 @@ type AuthPageLink = {
   user: string;
   path: string;
 };
+
+type Contact = {
+  img: string;
+  title: string;
+  price: number;
+}

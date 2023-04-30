@@ -6,6 +6,11 @@ import loginRoute from './routes/loginRoute';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import { strategy } from './middlewares/passport';
+import envConfig from './config/envConfig';
+import cors from 'cors';
+
+const { CLIENT_PORT } = envConfig;
+
 
 const sessionOptions: SessionOptions = {
   secret: 'BlogSecret',
@@ -14,6 +19,8 @@ const sessionOptions: SessionOptions = {
 };
 
 const app = express();
+
+app.use(cors({ origin: `http://localhost:${CLIENT_PORT}`, credentials: true }));
 
 app.use(express.json());
 app.use(session(sessionOptions));
