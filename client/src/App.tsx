@@ -6,10 +6,12 @@ import AboutPage from './pages/AboutPage/AboutPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import ProductPage from './pages/ProductPage/ProductPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
-import data from "./data"
+import { Provider } from 'react-redux'
+import store from './store';
 
 function App(): JSX.Element {
   return (
+    <Provider store={store}>
     <div className="App">
       <Navbar />
       <Routes>
@@ -21,6 +23,8 @@ function App(): JSX.Element {
       </Routes>
 
     </div>
+      </Provider>
+
   )
 }
 /* <Navbar /> */ 
