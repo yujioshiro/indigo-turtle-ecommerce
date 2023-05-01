@@ -1,6 +1,7 @@
 import React from 'react'
 import { Contact } from './global'
 
+
 export default function HomeProducts(props: Contact){
     return(
         <div>
@@ -15,3 +16,4 @@ export default function HomeProducts(props: Contact){
         </div>
     )
 }
+

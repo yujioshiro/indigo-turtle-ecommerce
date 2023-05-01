@@ -19,10 +19,15 @@ type Product = {
   id: number;
 };
 
-type HomePageLink = {
+type LogoLink = {
   image: JSX.Element;
   path: string;
 };
+
+type WebsiteLink = {
+  name: string;
+  path: string;
+}
 
 type ProductPageLink = {
   name: string;
