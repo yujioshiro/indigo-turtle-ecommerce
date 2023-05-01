@@ -5,28 +5,26 @@ import HomePage from './pages/HomePage/HomePage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import ProductPage from './pages/ProductPage/ProductPage';
-
-import data from "./data"
+import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
+import { Provider } from 'react-redux'
+import store from './store';
 
 function App(): JSX.Element {
-  const DataJs = data.map(item => {
-    return(
-      <HomePage 
-          key={item.id}
-          item={item}
-    )
-  })
- 
   return (
+    <Provider store={store}>
     <div className="App">
+      <Navbar />
       <Routes>
-        <Route path="AboutPage" element={<AboutPage />} />
-        <Route path="AuthPage" element={<AuthPage />} />
+        <Route path="HomePage" element={<HomePage />} />
         <Route path="ProductPage" element={<ProductPage />} />
+        <Route path="AboutPage" element={<AboutPage />} />
+        <Route path="CheckoutPage" element={<CheckoutPage />} />
+        <Route path="AuthPage" element={<AuthPage />} />
       </Routes>
 
-      <section>{DataJs}</section>
     </div>
+      </Provider>
+
   )
 }
 /* <Navbar /> */ 

@@ -1,76 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
 
-
-.Home-img{
-    display: flex;
-    width: 40px;
-    height: 40px;
-}
-
-.Home-nav{
-    display: flex;
-    background-color: blueviolet;
-    padding: 10px;
-    width: 100%;
-    height: 30px;
+@layer base {
+  .body {
+    background-color: theme('colors.neutral-white');
+    font-family: theme('fontFamily.inter');
+  }
 }
 
-.Home-img{
+@layer components {
+  .Navbar {
+    background-color: theme('colors.primary-dark');
+  }
+  .WebsiteName {
+    color: theme('colors.neutral-white');
+    font-size: 3rem;
+    font-weight: 900;
+  }
+  .Links {
     display: flex;
-}
-
-.Home-navAboutUs{
+    color: theme('colors.link');
+    font-size: 1.5rem;
+    align-items: center;
+    gap: 5rem;
+    font-weight: 700;
+  }
+  .User {
     display: flex;
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    position: absolute;
-    left: 6%;
-  
-}
-.Home-navAboutUs:hover{
-    display: flex;
-    color: rgba(255, 255, 255, 0.436);
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.Home-title{
-    color: white;
-    font-size: 30px;
-    display: flex;
-    position: absolute;
-    left: 45%;
-  
-}
-
-.Home-btn-signUp{
-    display: flex;
-    background-color: rgb(204, 253, 92);
-    border-radius: 10px;
-    font-size: 19px;
-    font-weight: bold;
-    position: absolute;
-    right: 2%
-}
-.Home-btn-signUp:hover{
-    display: flex;
-    background-color: rgb(255, 127, 127);
-    cursor: pointer;
-}
-
-.Home-btn-logIn{
-     display: flex;
-    background-color: rgb(204, 253, 92);
-    border-radius: 10px;
-    font-size: 19px;
-    font-weight: bold;
-    position: absolute;
-    right: 7%
-}
-.Home-btn-logIn:hover{
-    display: flex;
-    background-color: rgb(255, 127, 127);
-    cursor: pointer;
+    color: theme('colors.neutral-white');
+  }
 }

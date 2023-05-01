@@ -1,0 +1,67 @@
+.Auth {
+    display: flex;
+    justify-content: center;
+}
+  
+.Container {
+  margin-top:3rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.Container h2 {
+  font-size: 2rem; /* Increase the font size */
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.submit input[type="submit"] {
+  width: 100%;
+  margin-top: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  
+  overflow-y: auto;
+}
+label {
+  margin-top: 10px;
+  text-align: left;
+}
+
+input {
+  margin-bottom: 12px;
+  border-width: 3px;
+  height: 3rem;
+  border-radius: 12px;
+}
+
+text {
+  align-items: center;
+}
+
+.Toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+.ToggleBtn {
+    width: 30px;
+    height: 15px;
+    border-radius: 15px;
+    background-color: #ccc;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+  
+.ToggleBtn.Active {
+    background-color: #3d3d3d;
+}
