@@ -7,10 +7,10 @@
     "seed": "node --require esbuild-register prisma/seed.ts"
   },
   "scripts": {
-    "dev": "ts-node-dev ./src/index.ts",
+    "dev": "NODE_ENV=development ts-node-dev ./src/index.ts",
     "build": "webpack",
     "start": "webpack --watch",
-    "start2": "npm run build && node ./dist/index.js",
+    "start2": "NODE_ENV=development npm run build && node ./dist/index.js",
     "install2": "npm i && npx prisma generate"
   },
   "keywords": [],
