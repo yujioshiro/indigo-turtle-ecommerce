@@ -1,16 +1,16 @@
 import React from 'react';
-import './AboutPage.css';
+import { FaGithub } from 'react-icons/fa';
 
 export default function AboutPage(): JSX.Element {
   return (
-    <div className="flex flex-col my-10 gap-4 content-center">
-      <h1 className="text-neutral-white text-5xl text-center my-10">
+    <div className="my-10 flex flex-col content-center gap-4">
+      <h1 className="my-10 text-center text-5xl text-neutral-white">
         Welcome to the Indigo Turtle Group!
       </h1>
-      <div className="text-link text-3xl text-center mx-auto">
+      <div className="mx-auto text-center text-3xl text-link">
         Meet the crew!
       </div>
-      <ul className="text-neutral-white text-3xl text-center">
+      <ul className="text-center text-3xl text-neutral-white">
         <li>DekoMoon</li>
         <li>Jennifer</li>
         <li>missbabelfish</li>
@@ -20,12 +20,16 @@ export default function AboutPage(): JSX.Element {
         <li>solarized7124</li>
         <li>Yuji</li>
       </ul>
-      <a
-        className="text-3xl text-link text-center my-10 block"
-        href="https://github.com/Hack-Weekly/indigo-turtle-ecommerce"
-      >
-        Check us out on Github!
-      </a>
+      <div className="flex items-center justify-center gap-3">
+        <a
+          className="my-10 inline-block text-center text-3xl text-link"
+          href="https://github.com/Hack-Weekly/indigo-turtle-ecommerce"
+        >
+          Check us out on Github!
+        </a>
+
+        {<FaGithub size={40} style={{ fill: 'white' }} />}
+      </div>
     </div>
   );
 }
