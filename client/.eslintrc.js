@@ -9,7 +9,7 @@ module.exports = {
     'plugin:tailwindcss/recommended',
   ],
   rules: {},
-  files: ['*.ts','*.tsx', '*.js', '*.jsx'],
+
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
