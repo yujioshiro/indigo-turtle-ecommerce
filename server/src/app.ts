@@ -13,6 +13,8 @@ import checkoutRoute from '@/routes/checkoutRoute';
 import { strategy } from '@/middlewares/passport';
 import stripeWebhookRoute from '@/routes/stripeWebhookRoute';
 import envConfig from '@/config/envConfig';
+import { maybeExclude } from './utils/maybeExclude';
+import { onlyInclude } from './utils/maybeInclude';
 
 const { CLIENT_PORT } = envConfig;
 
@@ -24,8 +26,9 @@ const sessionOptions: SessionOptions = {
 
 const app = express();
 
+app.use(maybeExclude(express.json(), ['/api/stripeWebhook']) as any);
 app.use(cors({ origin: `http://localhost:${CLIENT_PORT}`, credentials: true }));
-app.use(express.raw({ type: '*/*' }));
+app.use('/api/stripeWebhook', express.raw({ type: '*/*' }));
 app.use(express.json());
 app.use(session(sessionOptions));
 app.use(cookieParser());

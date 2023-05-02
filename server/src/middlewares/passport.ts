@@ -10,7 +10,6 @@ export const strategy = new Strategy(
     usernameField: 'email',
   },
   async (targetEmail, targetPwd, done) => {
-    console.log('you pass');
     const user = await prisma.user.findUnique({
       where: {
         email: targetEmail,

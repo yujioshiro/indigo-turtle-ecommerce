@@ -23,26 +23,15 @@ export const stripeWebhook = async (req: Request, res: Response) => {
     );
   } catch (err) {
     console.error(err);
-    console.log(sig);
-    console.log(req.body);
     return res.status(400).send(`Webhook Error: ${err}`);
   }
 
-  if (event.type === 'payment_intent.payment_failed') {
-    const failedPaymentIntent = event.data.object;
-    if (
-      'id' in failedPaymentIntent &&
-      typeof failedPaymentIntent.id === 'string'
-    ) {
-      await stripe.paymentIntents.cancel(failedPaymentIntent.id);
-      return res.send(`Payment failed: ${failedPaymentIntent.id}`);
-    } else return res.send(`Payment failed: ${failedPaymentIntent}`);
-  } else if (event.type !== 'payment_intent.succeeded') {
+  if (event.type !== 'payment_intend.succeeded') {
     return res.send(`Unknown event type: ${event.type}`);
   }
 
   const paymentSuccessData: Stripe.Event.Data.Object = event.data.object;
-  console.log(paymentSuccessData);
+  console.log('HELLO');
   // console.log((paymentSuccessData as any).line_items);
   // TODO: Deduct product quantity from db.
   // TODO: Create recipe/confirmation of purchase by creating a new row in Order and Order_Items table.
