@@ -1,8 +1,30 @@
-import config from '@/config/envConfig';
 import { Response, Request } from 'express';
 import Stripe from 'stripe';
 
+import config from '@/config/envConfig';
+import prisma from '@/prisma';
+import { executeSideEffect } from '@/utils/executeSideEffect';
+
 const endpointSecret: string = config.STRIPE_WEBHOOK_SECRET ?? '';
+
+interface Item {
+  name: string;
+  quantity: number;
+}
+
+interface SuccessId {
+  id: string;
+}
+
+const updateDB = async (checkoutId: string, lineItems: Item[]) => {
+  // ATOMIC TRANSACTION: https://www.prisma.io/docs/guides/performance-and-optimization/prisma-client-transactions-guide
+  // TODO: Deduct product quantity from db.
+  // TODO: Create recipe/confirmation of purchase by creating a new row in Order and Order_Items table.
+  // const updatedOrder = await prisma.order.update({
+  //   where: { id: 0 },
+  //   data: {},
+  // });
+};
 
 export const stripeWebhook = async (req: Request, res: Response) => {
   if (config.STRIPE_TEST_KEY === undefined)
@@ -26,16 +48,23 @@ export const stripeWebhook = async (req: Request, res: Response) => {
     return res.status(400).send(`Webhook Error: ${err}`);
   }
 
-  if (event.type !== 'payment_intend.succeeded') {
-    return res.send(`Unknown event type: ${event.type}`);
+  if (event.type !== 'checkout.session.completed') {
+    return res.status(202).send(`Unknown event type: ${event.type}`);
   }
 
-  const paymentSuccessData: Stripe.Event.Data.Object = event.data.object;
-  console.log('HELLO');
-  // console.log((paymentSuccessData as any).line_items);
-  // TODO: Deduct product quantity from db.
-  // TODO: Create recipe/confirmation of purchase by creating a new row in Order and Order_Items table.
+  const { id: successId } = event.data.object as SuccessId; // Type not defined for object
 
-  return res.send();
+  const result = await stripe.checkout.sessions.listLineItems(successId, {
+    limit: 5,
+  });
+
+  updateDB(
+    successId,
+    result.data.map((item) => ({
+      name: item.description,
+      quantity: item.quantity ?? 0,
+    }))
+  );
+
+  return res.status(201).send();
 };
-// acct_1N1wUvG575h6sLhw
