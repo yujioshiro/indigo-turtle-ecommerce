@@ -5,23 +5,33 @@
 
 @layer base {
   .body {
-    background-color: theme('colors.neutral-white');
     font-family: theme('fontFamily.inter');
   }
 }
 
 @layer components {
   .Navbar {
-    background-color: theme('colors.primary-dark');
+    background: theme('colors.navbar-color');
+    box-shadow: 1px 1.5px 6px theme('colors.neutral-gray');
+    overflow-x: hidden;
   }
-  .WebsiteName {
+  .SiteName {
+    display: flex;
     color: theme('colors.neutral-white');
+    background: linear-gradient(
+      60deg,
+      transparent 0%,
+      #16137c 100%
+    );
+    background-repeat: no-repeat;
+    background-size: auto 1rem;
+    background-position: bottom;
     font-size: 3rem;
     font-weight: 900;
   }
-  .Links {
+  .NavLinks {
     display: flex;
-    color: theme('colors.link');
+    color: theme('colors.neutral-white');
     font-size: 1.5rem;
     align-items: center;
     gap: 5rem;

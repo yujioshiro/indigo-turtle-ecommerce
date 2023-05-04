@@ -1,55 +1,41 @@
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { LogoLink, ProductPageLink, AboutPageLink, CheckoutPageLink, AuthPageLink, WebsiteLink } from '../../global'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { NavItems, NavItemsProps } from '../../global';
 
-export const Home = (props: LogoLink) => {
+export const Logo = (props: NavItemsProps) => {
   return (
-    <NavLink to={props.path}>
-      {props.image}
-    </NavLink>
+    <div className='w-16'>
+      <NavLink to={props.path}>
+        {props.image}
+      </NavLink>
+    </div>
   )
 }
 
-export const SellProduct = (props: ProductPageLink) => {
+export const SiteName = (props: NavItemsProps) => {
   return (
-    <NavLink to={props.path}>
-      {props.name}
-    </NavLink>
+    <div className='SiteName'>
+      <NavLink to={props.path}>
+        {props.name}
+      </NavLink>
+    </div>
   )
 }
 
-export const AboutUs = (props: AboutPageLink) => {
+export const NavList = (props: NavItems) => {
   return (
-    <NavLink to={props.path}>
-      {props.name}
-    </NavLink>
-  )
-}
-
-export const Website = (props: WebsiteLink) => {
-  return (
-    <NavLink to={props.path}>
-      {props.name}
-    </NavLink>
-  )
-}
-
-export const Checkout = (props: CheckoutPageLink) => {
-  return (
-    <NavLink to={props.path}>
-      {props.icon}
-    </NavLink>
-  )
-}
-
-export const Account = (props: AuthPageLink) => {
-  return (
-    <NavLink to={props.path}>
-      {props.user}
-    </NavLink>
-  )
-}
-
+    <div className='NavLinks'>
+      {props.items.map((item) => {
+        return (
+          <NavLink to={item.path} className='inline-flex items-center gap-2 hover:text-secondary-light duration-150'>
+            {item.icon}
+            {item.name}
+          </NavLink>
+        )
+      })}
+    </div>
+  );
+};
