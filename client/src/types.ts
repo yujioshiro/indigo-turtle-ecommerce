@@ -7,5 +7,5 @@ export interface Product {
   image: string;
   createdAt: Date;
   updatedAt: Date;
-  id: string;
+  id: number;
 }
