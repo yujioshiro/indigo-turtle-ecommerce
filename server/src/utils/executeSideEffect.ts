@@ -1,11 +1,12 @@
 export type Maybe<T> = T | null;
 
-export const executeSideEffect = async <T>(
-  fn: (...args: any[]) => T,
+export const executeSideEffect = async (
+  fn: (...args: any[]) => Promise<unknown>,
   ...args: any[]
-): Promise<Maybe<T>> => {
+): Promise<unknown> => {
   try {
-    return fn(...args);
+    const value: unknown = await fn(...args);
+    return value;
   } catch (_) {
     return null;
   }

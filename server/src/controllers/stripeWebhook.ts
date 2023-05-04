@@ -3,7 +3,9 @@ import Stripe from 'stripe';
 
 import config from '@/config/envConfig';
 import prisma from '@/prisma';
-import { executeSideEffect } from '@/utils/executeSideEffect';
+import { Maybe, executeSideEffect } from '@/utils/executeSideEffect';
+import { setPromiseTimeout } from '@/utils/setPromiseTimeout';
+import { Product } from '@prisma/client';
 
 const endpointSecret: string = config.STRIPE_WEBHOOK_SECRET ?? '';
 
@@ -16,7 +18,10 @@ interface SuccessId {
   id: string;
 }
 
-const updateDB = async (checkoutId: string, lineItems: Item[]) => {
+const updateDB = async (
+  checkoutId: string,
+  lineItems: Item[]
+): Promise<void> => {
   // ATOMIC TRANSACTION: https://www.prisma.io/docs/guides/performance-and-optimization/prisma-client-transactions-guide
   // TODO: Deduct product quantity from db.
   // TODO: Create recipe/confirmation of purchase by creating a new row in Order and Order_Items table.
@@ -24,6 +29,24 @@ const updateDB = async (checkoutId: string, lineItems: Item[]) => {
   //   where: { id: 0 },
   //   data: {},
   // });
+
+  const result: unknown = await executeSideEffect(prisma.$transaction, [
+    lineItems.map((item) =>
+      prisma.product.update({
+        where: {
+          name: item.name,
+        },
+        data: {
+          quantity: { decrement: item.quantity },
+        },
+      })
+    ),
+  ]);
+
+  if (result === null) {
+    console.error('Failed to decrement product quantity.');
+    // TODO: Stripe undo transaction
+  }
 };
 
 export const stripeWebhook = async (req: Request, res: Response) => {
