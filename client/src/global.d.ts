@@ -1,13 +1,16 @@
 interface User {
-    id?: string;
-    username: string;
-    email?: string;
-    password: string;
-    address?: string;
-  }
+  id?: string;
+  username: string;
+  email?: string;
+  password: string;
+  address?: string;
+}
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import '@prisma/client';
+import { type } from 'os';
+import { ReactNode } from 'react';
+import { To } from 'react-router-dom';
 
 type Product = {
   name: string;
@@ -19,38 +22,19 @@ type Product = {
   id: number;
 };
 
-type LogoLink = {
-  image: JSX.Element;
+type NavItemsProps = {
+  name?: string | string[];
+  icon?: ReactNode | ReactNode[];
+  image?: JSX.Element;
   path: string;
 };
 
-type WebsiteLink = {
-  name: string;
-  path: string;
+type NavItems = {
+  items: NavProps[]
 }
-
-type ProductPageLink = {
-  name: string;
-  path: string;
-};
-
-type AboutPageLink = {
-  name: string;
-  path: string;
-};
-
-type CheckoutPageLink = {
-  icon: ReactNode;
-  path: string;
-};
-
-type AuthPageLink = {
-  user: string;
-  path: string;
-};
 
 type Contact = {
   img: string;
   title: string;
   price: number;
-}
+};

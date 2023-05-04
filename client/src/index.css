@@ -3,5 +3,5 @@
 @import "tailwindcss/utilities";
 
 body {
-    background-color: #1e1b4b;
+    background-color: theme('colors.background-color');
 }
