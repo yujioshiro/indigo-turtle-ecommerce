@@ -21,10 +21,14 @@ const config = {
       },
     ],
   },
-
   resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
     extensions: ['.ts', '.js'],
   },
+
+  devtool: 'source-map',
 
   output: {
     path: path.resolve(__dirname, 'dist'),
