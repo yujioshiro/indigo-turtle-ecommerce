@@ -1,16 +1,17 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import type {PayloadAction} from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { productReducer } from './reducers/productReducer';
 
 export interface UserState {
   username: string;
 }
 
-const initialState:UserState = {
-  username: ''
-}
+const initialState: UserState = {
+  username: '',
+};
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState: initialState,
   reducers: {
     auth: (state, action: PayloadAction<UserState>) => {
@@ -22,16 +23,17 @@ const userSlice = createSlice({
   },
 });
 
-export const { auth, logout } = userSlice.actions
+export const { auth, logout } = userSlice.actions;
 
 const store = configureStore({
   reducer: {
     user: userSlice.reducer,
-  }
+    products: productReducer,
+  },
 });
 
-type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState>;
 
-export const selectUser = (state: RootState):string => state.user.username;
+export const selectUser = (state: RootState): string => state.user.username;
 
 export default store;
