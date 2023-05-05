@@ -65,9 +65,9 @@ const createStripeSession = async (
       line_items: stripeItems,
       success_url: `${config.CLIENT_URL}/`,
       cancel_url: `${config.CLIENT_URL}/`,
-      // metadata: {
-      //   product_ids: JSON.stringify(prods.map((prod) => prod.id)),
-      // },
+      metadata: {
+        userId: prods[0].userId,
+      },
     });
   } catch (error) {
     console.error(error);
