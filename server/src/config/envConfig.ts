@@ -14,8 +14,7 @@ const SESSION_SECRET = process.env.SESSION_SECRET;
 const STRIPE_TEST_KEY = process.env.STRIPE_TEST_KEY;
 
 export default {
-  DATABASE_URL:
-    mode === 'development' ? ONLINE_DATABASE_URL : ONLINE_DATABASE_URL,
+  DATABASE_URL: ONLINE_DATABASE_URL,
   PUBLIC_ANON_KEY,
   PORT,
   CLIENT_PORT,

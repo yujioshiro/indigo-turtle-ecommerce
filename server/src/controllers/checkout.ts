@@ -15,7 +15,7 @@ import { checkoutSchema } from '@/validation/checkoutSchema';
 interface Product {
   name: string;
   quantity: number;
-  id: number | null;
+  userId: number | null;
 }
 
 const createStripeSession = async (
@@ -33,19 +33,19 @@ const createStripeSession = async (
 
     const storeProducts = await prisma.product.findMany();
 
+    // console.log(storeProducts);
+    // console.log(prods);
     const stripeItems = prods.map((prod) => {
-      const p = storeProducts.find(
-        (sProd) => sProd.name === prod.name && sProd.id === prod.id
-      );
+      const p = storeProducts.find((sProd) => sProd.name === prod.name);
 
       if (p === undefined)
-        throw new Error('Error: No product found in Products table');
+        throw new Error('No product found in Products table');
       if (+prod.quantity > p.quantity)
         throw new Error(
-          'Error: Requested product quantity is larger than the amount available.'
+          'Requested product quantity is larger than the amount available.'
         );
       if (config.CLIENT_URL === undefined)
-        throw new Error('Error: Client url not found.');
+        throw new Error('Client url not found.');
 
       return {
         price_data: {
@@ -66,12 +66,12 @@ const createStripeSession = async (
       success_url: `${config.CLIENT_URL}/`,
       cancel_url: `${config.CLIENT_URL}/`,
       metadata: {
-        product_ids: JSON.stringify(prods.map((prod) => prod.id)),
+        userId: prods[0].userId,
       },
     });
   } catch (error) {
     console.error(error);
-    return `Error: Stripe API error -> ${error}`;
+    return `Stripe API error -> ${error}`;
   }
 };
 
@@ -86,7 +86,8 @@ export const checkout = async (req: Request, res: Response) => {
   if (body.success === false)
     return res.status(400).json({ errors: body.error.issues });
 
-  const session = await createStripeSession(body.data.products);
+  const products = body.data.products;
+  const session = await createStripeSession(products);
   if (typeof session === 'string')
     return res.status(500).json({ errors: session });
 
