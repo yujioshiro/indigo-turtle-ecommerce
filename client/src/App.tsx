@@ -6,6 +6,7 @@ import AboutPage from './pages/AboutPage/AboutPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import ProductPage from './pages/ProductPage/ProductPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
+import CreateProdPage from './pages/CreateProdPage/CreateProdPage';
 import { Provider } from 'react-redux'
 import store from './store';
 
@@ -20,6 +21,7 @@ function App(): JSX.Element {
         <Route path="AboutPage" element={<AboutPage />} />
         <Route path="CheckoutPage" element={<CheckoutPage />} />
         <Route path="AuthPage" element={<AuthPage />} />
+        <Route path="createProduct" element={<CreateProdPage />}  />
       </Routes>
 
     </div>

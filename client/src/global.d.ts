@@ -9,14 +9,12 @@ interface User {
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import '@prisma/client';
 
-type Product = {
+interface Product  {
   name: string;
   description: string | null;
   price: Decimal;
   quantity: number;
-  userId: number | null;
   image: string | null;
-  id: number;
 };
 
 type LogoLink = {
