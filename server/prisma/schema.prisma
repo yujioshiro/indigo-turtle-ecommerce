@@ -34,7 +34,7 @@ model Order {
 }
 
 model Product {
-  name        String      @unique
+  name        String
   description String?
   price       Decimal     @db.Decimal(10, 2)
   quantity    Int
