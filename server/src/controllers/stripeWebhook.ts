@@ -92,7 +92,7 @@ const updateDB = async (
   stripe: Stripe
 ): Promise<boolean> => {
   // ATOMIC TRANSACTION: https://www.prisma.io/docs/guides/performance-and-optimization/prisma-client-transactions-guide
-  const result = await execSideEffect(
+  const result = await execSideEffectWithError(
     handleDBTransactions,
     lineItems,
     successObject
@@ -112,7 +112,10 @@ const updateDB = async (
     });
 
     if (refund === null) {
-      console.error('Unknown error when trying to reverse checkout payment.');
+      console.error(
+        'Unknown error when trying to reverse checkout payment.' +
+          ` Payment id: ${paymentIntentId}`
+      );
     }
 
     const cancelledSession = execSideEffect(
