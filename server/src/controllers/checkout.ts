@@ -33,8 +33,6 @@ const createStripeSession = async (
 
     const storeProducts = await prisma.product.findMany();
 
-    // console.log(storeProducts);
-    // console.log(prods);
     const stripeItems = prods.map((prod) => {
       const p = storeProducts.find((sProd) => sProd.name === prod.name);
 

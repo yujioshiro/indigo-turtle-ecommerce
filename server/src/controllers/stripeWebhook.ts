@@ -57,15 +57,8 @@ const handleDBTransactions = async (
 
     products.forEach(async (prod, i) => {
       if ('error' in prod) {
-        console.log(lineItems[0].name);
-        console.error(
-          await tx.product.findUnique({
-            where: {
-              name: lineItems[0].name,
-            },
-          })
-        );
-        console.log('\nhello\n');
+        console.error('One or more product was not found.');
+        console.error({ products });
         throw prod.error;
       }
     });
