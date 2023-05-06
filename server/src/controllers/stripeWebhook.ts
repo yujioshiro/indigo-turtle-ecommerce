@@ -90,7 +90,7 @@ const updateDB = async (
   successObject: SuccessObject,
   lineItems: Item[],
   stripe: Stripe
-): Promise<void> => {
+): Promise<boolean> => {
   // ATOMIC TRANSACTION: https://www.prisma.io/docs/guides/performance-and-optimization/prisma-client-transactions-guide
   const result = await execSideEffect(
     handleDBTransactions,
@@ -102,6 +102,7 @@ const updateDB = async (
     console.error(
       'Something went wrong with one of the interactions in the DB with stripeWebhook'
     );
+    console.error(result);
 
     const session = await stripe.checkout.sessions.retrieve(successObject.id);
     const paymentIntentId = session.payment_intent;
@@ -121,7 +122,11 @@ const updateDB = async (
 
     if (cancelledSession === null)
       console.error('Unknown error when trying to cancel checkout session');
+
+    return true;
   }
+
+  return false;
 };
 
 export const stripeWebhook = async (req: Request, res: Response) => {
@@ -154,7 +159,7 @@ export const stripeWebhook = async (req: Request, res: Response) => {
   if (successObject.payment_status !== 'paid') return res.status(202).send();
 
   const result = await stripe.checkout.sessions.listLineItems(successObject.id);
-  updateDB(
+  const wasUpdated = await updateDB(
     successObject,
     result.data.map((item) => ({
       name: item.description,
@@ -164,7 +169,8 @@ export const stripeWebhook = async (req: Request, res: Response) => {
     stripe
   );
 
-  return res.status(201).send();
+  if (wasUpdated) return res.status(201).send();
+  else return res.status(505).send();
 };
 
 /*
