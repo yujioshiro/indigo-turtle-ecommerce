@@ -56,7 +56,10 @@ const handleDBTransactions = async (
     );
 
     if (products.includes(null) === true)
-      throw new Error('A product purchased was not found in the database.');
+      throw {
+        error: 'A product purchased was not found in the database.',
+        data: products,
+      };
 
     const order = await execSideEffectWithError(tx.order.create, {
       data: {
