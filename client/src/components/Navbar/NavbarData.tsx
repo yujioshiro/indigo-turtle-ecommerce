@@ -28,7 +28,7 @@ export const NavList = (props: NavItems) => {
         return (
           <NavLink
             to={item.path}
-            className="inline-flex items-center gap-2 hover:text-secondary-light duration-150"
+            className="inline-flex items-center gap-2 duration-150 hover:text-secondary-light"
             key={item.path}
           >
             {item.icon}
