@@ -43,7 +43,7 @@ const handleDBTransactions = async (
   await prisma.$transaction(async (tx: TransactionInstance) => {
     const products = await Promise.all(
       lineItems.map(
-        (item): Promise<Product | { error: any }> =>
+        (item) =>
           execSideEffectWithError(tx.product.update, {
             where: {
               name: item.name,
@@ -55,12 +55,18 @@ const handleDBTransactions = async (
       )
     );
 
-    products.forEach((prod, i) => {
+    products.forEach(async (prod, i) => {
       if ('error' in prod) {
-        throw {
-          error: 'A product purchased was not found in the database',
-          data: prod,
-        };
+        console.log(lineItems[0].name);
+        console.error(
+          await tx.product.findUnique({
+            where: {
+              name: lineItems[0].name,
+            },
+          })
+        );
+        console.log('\nhello\n');
+        throw prod.error;
       }
     });
 
