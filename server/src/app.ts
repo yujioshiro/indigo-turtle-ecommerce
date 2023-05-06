@@ -25,9 +25,10 @@ const sessionOptions = {
 };
 
 const app = express();
+console.log(CLIENT_URL);
 
 app.use(maybeExclude(express.json(), ['/api/stripeWebhook']) as any);
-app.use(cors({ origin: CLIENT_URL, credentials: true }));
+// app.use(cors({ origin: CLIENT_URL, credentials: true }));
 app.use('/api/stripeWebhook', express.raw({ type: '*/*' }));
 app.use(express.json());
 app.use(session(sessionOptions));
