@@ -66,7 +66,7 @@ const handleDBTransactions = async (
     const order = await execSideEffectWithError(tx.order.create, {
       data: {
         userId: Number(successObject.metadata.userId),
-        total: successObject.amount_total,
+        total: successObject.amount_total / 100,
       },
     });
 
