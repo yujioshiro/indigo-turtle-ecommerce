@@ -12,14 +12,13 @@ import { type } from 'os';
 import { ReactNode } from 'react';
 import { To } from 'react-router-dom';
 
-type Product = {
+interface Product  {
+  id?: number,
   name: string;
   description: string | null;
   price: Decimal;
   quantity: number;
-  userId: number | null;
   image: string | null;
-  id: number;
 };
 
 type NavItemsProps = {
