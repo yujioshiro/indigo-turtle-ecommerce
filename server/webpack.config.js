@@ -2,10 +2,10 @@ const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
-const mode = 'development';
+// const mode = 'development';
 
 const config = {
-  mode: mode,
+  // mode: mode,
   target: 'node',
   entry: './src/index.ts',
   externals: [nodeExternals()],

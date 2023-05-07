@@ -7,34 +7,34 @@ import { NavItems, NavItemsProps } from '../../global';
 
 export const Logo = (props: NavItemsProps) => {
   return (
-    <div className='w-16'>
-      <NavLink to={props.path}>
-        {props.image}
-      </NavLink>
+    <div className="w-16">
+      <NavLink to={props.path}>{props.image}</NavLink>
     </div>
-  )
-}
+  );
+};
 
 export const SiteName = (props: NavItemsProps) => {
   return (
-    <div className='SiteName'>
-      <NavLink to={props.path}>
-        {props.name}
-      </NavLink>
+    <div className="SiteName">
+      <NavLink to={props.path}>{props.name}</NavLink>
     </div>
-  )
-}
+  );
+};
 
 export const NavList = (props: NavItems) => {
   return (
-    <div className='NavLinks'>
+    <div className="NavLinks">
       {props.items.map((item) => {
         return (
-          <NavLink to={item.path} className='inline-flex items-center gap-2 hover:text-secondary-light duration-150'>
+          <NavLink
+            to={item.path}
+            className="inline-flex items-center gap-2 duration-150 hover:text-secondary-light"
+            key={item.path}
+          >
             {item.icon}
             {item.name}
           </NavLink>
-        )
+        );
       })}
     </div>
   );

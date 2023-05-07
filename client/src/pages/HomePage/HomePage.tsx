@@ -26,6 +26,7 @@ export default function HomePage(): JSX.Element {
 
   return (
     <>
+
       {products.length > 0 && (
         <div className=" bg-neutral-white w-screen flex flex-row justify-center">
           <main className="flex gap-x-8 gap-y-5 justify-center flex-wrap max-w-screen-xl mt-6">
@@ -37,14 +38,14 @@ export default function HomePage(): JSX.Element {
               >
                 <figure className="w-60">
                   <img
-                    className="border-4 border-neutral-gray w-full h-52"
+                    className="h-52 w-full border-4 border-neutral-gray"
                     src={product.image}
                   />
-                  <div className="flex flex-col justify-between bg-neutral-gray h-36">
-                    <figcaption className="group-hover:underline ml-2">
+                  <div className="flex h-36 flex-col justify-between bg-neutral-gray">
+                    <figcaption className="ml-2 group-hover:underline">
                       {shortenString(product.name)}
                     </figcaption>
-                    <p className="group-hover:underline ml-2 mb-1">
+                    <p className="mb-1 ml-2 group-hover:underline">
                       ${product.price}
                     </p>
                   </div>
