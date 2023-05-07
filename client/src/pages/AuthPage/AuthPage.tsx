@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import store,{ selectUser,auth,logout } from '../../store';
 import type {UserState} from '../../store';
+import urls from '../../config'
 
 export default function Auth(): JSX.Element {
   
@@ -29,7 +30,8 @@ export default function Auth(): JSX.Element {
 
   const navigate = useNavigate();
   const instance = axios.create({
-    baseURL: 'http://localhost:3001/api',
+    // baseURL: 'http://localhost:3001/api',
+    baseURL: `${urls.PRODUCTION_URL}`,
     withCredentials: true,
   });
 
