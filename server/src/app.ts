@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
 // 1st Party
+//import registrationRoute from '@/routes/registrationRoute';
 import registrationRoute from '@/routes/registrationRoute';
 import productsRoute from '@/routes/productsRouter';
 import loginRoute from '@/routes/loginRoute';

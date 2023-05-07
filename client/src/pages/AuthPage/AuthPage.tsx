@@ -45,24 +45,20 @@ export default function Auth(): JSX.Element {
     
     try {
        
-      {
-      isSignIn?
-      await instance.post('/login', {
-        username: values.username,
-        password: values.password,
-      })
+      const response = isSignIn
+      ? await instance.post('/login', {
+          email: values.email,
+          password: values.password,
+        })
+      : await instance.post('/register', {
+          username: values.username,
+          email: values.email,
+          password: values.password,
+          passwordConfirm: values.passwordConfirm,
+          address: values.address,
+        });
       
-      :
-      await instance.post('/register', {
-        username: values.username,
-        email: values.email,
-        password: values.password,
-        passwordConfirm: values.passwordConfirm,
-        address: values.address
-      })
-    }
-      
-      const payload:UserState = {username:values.username}
+      const payload:UserState = {username:response.data.username}
       dispatch(auth(payload))
 
       console.log("User registered successfully")
