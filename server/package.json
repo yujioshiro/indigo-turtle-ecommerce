@@ -8,8 +8,8 @@
   },
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts",
-    "build": "webpack",
-    "start": "webpack --mode production && node ./dist/index.js",
+    "build": "webpack --mode production",
+    "start": "npm run build && node ./dist/index.js",
     "start2": "webpack --mode development && node ./dist/index.js",
     "install2": "npm i && npx prisma generate",
     "migrate": "prisma migrate dev --name",
