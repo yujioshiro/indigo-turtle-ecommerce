@@ -4,6 +4,6 @@ import { isLoggedIn } from '@/middlewares/passport';
 
 const router = express.Router();
 
-router.post('/', stripeWebhook);
+router.post('/', express.raw({ type: '*/*' }), stripeWebhook);
 
 export default router;

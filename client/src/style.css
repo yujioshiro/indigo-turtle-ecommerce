@@ -4,6 +4,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
 
 @layer base {
+  body {
+    background-color: theme('colors.background-color');
+  }
   .body {
     font-family: theme('fontFamily.inter');
   }
@@ -18,11 +21,7 @@
   .SiteName {
     display: flex;
     color: theme('colors.neutral-white');
-    background: linear-gradient(
-      60deg,
-      transparent 0%,
-      #16137c 100%
-    );
+    background: linear-gradient(60deg, transparent 0%, #16137c 100%);
     background-repeat: no-repeat;
     background-size: auto 1rem;
     background-position: bottom;

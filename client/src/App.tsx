@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar/Navbar';
 import HomePage from './pages/HomePage/HomePage';
 import AboutPage from './pages/AboutPage/AboutPage';
@@ -29,5 +29,5 @@ function App(): JSX.Element {
 
   )
 }
-/* <Navbar /> */ 
+/* <Navbar /> */
 export default App;
