@@ -13,12 +13,12 @@ import { ReactNode } from 'react';
 import { To } from 'react-router-dom';
 
 interface Product  {
-  id?: number,
+  id?: number;
   name: string;
   description: string | null;
-  price: Decimal;
+  price: number;
   quantity: number;
-  image?: string;
+  image: string | null;
 };
 
 type NavItemsProps = {
