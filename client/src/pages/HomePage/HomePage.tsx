@@ -39,7 +39,7 @@ export default function HomePage(): JSX.Element {
                 <figure className="w-60">
                   <img
                     className="h-52 w-full border-4 border-neutral-gray"
-                    src={product.image ?? ''}
+                    src={product.image}
                   />
                   <div className="flex h-36 flex-col justify-between bg-neutral-gray">
                     <figcaption className="ml-2 group-hover:underline">

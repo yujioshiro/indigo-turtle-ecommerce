@@ -18,7 +18,7 @@ interface Product  {
   description: string | null;
   price: Decimal;
   quantity: number;
-  image: string | null;
+  image?: string;
 };
 
 type NavItemsProps = {

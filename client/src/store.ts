@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import { Product } from './global';
+import type { Product } from './global';
 
 export interface UserState {
   username: string;
@@ -60,8 +60,8 @@ const store = configureStore({
 
 type RootState = ReturnType<typeof store.getState>;
 
-export const selectUser = (state: RootState):string => state.user.username;
+export const selectUser = (state: RootState): string => state.user.username;
 
-export const selectCart = (state: RootState) => state.cart.Products;
+export const selectCart = (state: RootState): Product[] => state.cart.Products;
 
 export default store;
