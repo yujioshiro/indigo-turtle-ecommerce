@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import store, {selectUser, selectCart} from '../../store'
+import {selectCart} from '../../store'
 import productService from '../../services/productService';
 import { setProducts } from '../../reducers/productReducer';
 import { Link } from 'react-router-dom';

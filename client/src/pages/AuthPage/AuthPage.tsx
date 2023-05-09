@@ -31,7 +31,7 @@ export default function Auth(): JSX.Element {
   const navigate = useNavigate();
   const instance = axios.create({
     // baseURL: 'http://localhost:3001/api',
-    baseURL: `${urls.PRODUCTION_URL}`,
+    baseURL: `${urls.LOCAL_URL}`,
     withCredentials: true,
   });
 
@@ -60,7 +60,10 @@ export default function Auth(): JSX.Element {
           address: values.address,
         });
       
-      const payload:UserState = {username:response.data.username}
+      const payload:UserState = {
+                                  id:response.data.id,
+                                  username:response.data.username,
+                                  email: response.data.email}
       dispatch(auth(payload))
 
       console.log("User registered successfully")
@@ -104,21 +107,22 @@ export default function Auth(): JSX.Element {
           />
         </div>
         <Form>
+        {isSignIn ? null : (
+          <>
           <label>Username: </label>
           <Field type="text" 
                  name="username" 
                  value={values.username} 
                  onChange={handleChange} />
+          </>
+        )}
 
-          {isSignIn ? null : (
-            <>
                <label>Email: </label>
                <Field type="text" 
                       name="email" 
                       value={values.email} 
                       onChange={handleChange} />
-            </>
-          )}
+      
 
           <label>Password: </label>
           <Field type="password" 
