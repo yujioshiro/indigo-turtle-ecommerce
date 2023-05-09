@@ -1,26 +1,32 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import type {PayloadAction} from '@reduxjs/toolkit';
-import { Product } from './global';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { type Product } from './global';
 
 export interface UserState {
   username: string;
 }
 
-const initialState:UserState = {
-  username: ''
-}
-
 interface ProductSliceState {
-  Products: Product[]
+  Products: Product[];
 }
 
-const productInititalState:ProductSliceState = {
-  Products: []
-}
+type RootState = ReturnType<typeof store.getState>;
+
+/* State */
+
+const initialState: UserState = {
+  username: '',
+};
+
+const productInititalState: ProductSliceState = {
+  Products: [],
+};
+
+/* Slices */
 
 const userSlice = createSlice({
-  name: "user",
-  initialState: initialState,
+  name: 'user',
+  initialState,
   reducers: {
     auth: (state, action: PayloadAction<UserState>) => {
       state.username = action.payload.username;
@@ -31,10 +37,10 @@ const userSlice = createSlice({
   },
 });
 
-export const { auth, logout } = userSlice.actions
+export const { auth, logout } = userSlice.actions;
 
 const productSlice = createSlice({
-  name: "Cart",
+  name: 'Cart',
   initialState: productInititalState,
   reducers: {
     add: (state, action: PayloadAction<Product>) => {
@@ -46,22 +52,22 @@ const productSlice = createSlice({
     clear: (state) => {
       state.Products = [];
     },
-  }
-})
+  },
+});
 
-export const { add, remove, clear } = productSlice.actions
+/* Exporting Actions */
+
+export const { add, remove, clear } = productSlice.actions;
 
 const store = configureStore({
   reducer: {
     user: userSlice.reducer,
     cart: productSlice.reducer,
-  }
+  },
 });
 
-type RootState = ReturnType<typeof store.getState>;
+export const selectUser = (state: RootState): string => state.user.username;
 
-export const selectUser = (state: RootState):string => state.user.username;
-
-export const selectCart = (state: RootState) => state.cart.Products;
+export const selectCart = (state: RootState): Product[] => state.cart.Products;
 
 export default store;
