@@ -45,7 +45,7 @@ export default function Auth(): JSX.Element {
     try {
       const response = isSignIn
         ? await instance.post('/login', {
-            email: values.email,
+            email: values.username,
             password: values.password,
           })
         : await instance.post('/register', {
@@ -64,7 +64,7 @@ export default function Auth(): JSX.Element {
       dispatch(auth(payload));
 
       console.log('User registered successfully');
-      navigate('/ProductPage');
+      navigate('/');
     } catch (error) {
       console.error(error);
     }
