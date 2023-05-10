@@ -7,9 +7,9 @@
     "seed": "node --require esbuild-register prisma/seed.ts"
   },
   "scripts": {
-    "dev": "NODE_ENV=development ts-node-dev ./src/index.ts",
+    "dev": "ts-node-dev ./src/index.ts",
     "build": "webpack",
-    "start": "webpack --mode production && node ./dist/index.js",
+    "start": "node ./dist/index.js",
     "start2": "webpack --mode development && node ./dist/index.js",
     "install2": "npm i && npx prisma generate",
     "migrate": "prisma migrate dev --name",

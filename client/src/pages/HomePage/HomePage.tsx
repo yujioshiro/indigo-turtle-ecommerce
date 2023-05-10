@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+<<<<<<< HEAD
 import {selectCart} from '../../store'
+=======
+import store, { selectUser, selectCart } from '../../store';
+>>>>>>> 1277bd02188cab318c7022e7f20bc16bc53c9a65
 import productService from '../../services/productService';
 import { setProducts } from '../../reducers/productReducer';
 import { Link } from 'react-router-dom';
@@ -26,10 +30,9 @@ export default function HomePage(): JSX.Element {
 
   return (
     <>
-
       {products.length > 0 && (
-        <div className=" bg-neutral-white w-screen flex flex-row justify-center">
-          <main className="flex gap-x-8 gap-y-5 justify-center flex-wrap max-w-screen-xl mt-6">
+        <div className=" flex w-screen flex-row justify-center bg-neutral-white">
+          <main className="mt-6 flex max-w-screen-xl flex-wrap justify-center gap-x-8 gap-y-5">
             {products.map((product) => (
               <Link
                 className="group"
@@ -40,6 +43,7 @@ export default function HomePage(): JSX.Element {
                   <img
                     className="h-52 w-full border-4 border-neutral-gray"
                     src={product.image ?? ''}
+                    alt="Product"
                   />
                   <div className="flex h-36 flex-col justify-between bg-neutral-gray">
                     <figcaption className="ml-2 group-hover:underline">

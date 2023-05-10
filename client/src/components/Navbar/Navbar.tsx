@@ -1,12 +1,18 @@
 import React from 'react';
-import type { UserState } from '../../store';
-import store, { selectUser, auth, logout } from '../../store';
+import store, {
+  UserState,
+  selectCart,
+  selectUser,
+  auth,
+  logout,
+} from '../../store';
 import { useSelector, useDispatch } from 'react-redux';
 import TurtleLogo from './TurtleLogo.png';
 import { FaInfoCircle, FaShoppingCart, FaStore } from 'react-icons/fa';
 import { Logo, NavList, SiteName } from './NavbarData';
+import { type NavProps } from '../../global';
 
-const navItems = [
+const navProps: NavProps[] = [
   {
     icon: <FaStore />,
     name: 'Sell Product',
@@ -26,6 +32,7 @@ const navItems = [
 
 export function Navbar(): JSX.Element {
   const username = useSelector(selectUser);
+
   return (
     <nav className="Navbar">
       <div className="flex justify-between gap-4 p-4">
@@ -37,7 +44,7 @@ export function Navbar(): JSX.Element {
           <SiteName name={'IndigoList'} path={'/HomePage'} />
         </div>
         <div className="mr-24 flex items-center">
-          <NavList items={navItems} />
+          <NavList items={navProps} />
         </div>
       </div>
     </nav>

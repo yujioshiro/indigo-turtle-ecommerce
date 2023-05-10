@@ -1,3 +1,10 @@
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import '@prisma/client';
+import { type } from 'os';
+import { type ReactNode } from 'react';
+import { To } from 'react-router-dom';
+
 interface User {
   id?: string;
   username: string;
@@ -5,35 +12,39 @@ interface User {
   password: string;
   address?: string;
 }
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-import '@prisma/client';
-import { type } from 'os';
-import { ReactNode } from 'react';
-import { To } from 'react-router-dom';
 
+<<<<<<< HEAD
 interface Product  {
+=======
+interface Product {
+>>>>>>> 1277bd02188cab318c7022e7f20bc16bc53c9a65
   id?: number;
   name: string;
   description: string | null;
   price: number;
   quantity: number;
   image: string | null;
-};
+}
 
-type NavItemsProps = {
+interface NavItemsProps {
   name?: string | string[];
   icon?: ReactNode | ReactNode[];
   image?: JSX.Element;
   path: string;
-};
-
-type NavItems = {
-  items: NavProps[]
 }
 
-type Contact = {
+interface NavProps {
+  icon: IconType;
+  name: 'Sell Product' | 'About Us' | 'Cart';
+  path: string;
+}
+
+interface NavItems {
+  items: NavProps[];
+}
+
+interface Contact {
   img: string;
   title: string;
   price: number;
-};
+}
