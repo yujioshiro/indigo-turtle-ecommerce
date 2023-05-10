@@ -14,22 +14,21 @@ export default function Auth(): JSX.Element {
   const dispatch = useDispatch();
   const [isSignIn, setIsSignIn] = useState<boolean>(true);
 
-  interface SignUpValues {
-    username: string;
-    email: string;
-    password: string;
-    passwordConfirm: string;
-    address: string;
-  }
+  // interface SignUpValues {
+  //   username: string;
+  //   email: string;
+  //   password: string;
+  //   passwordConfirm: string;
+  //   address: string;
+  // }
 
-  interface SignInValues {
-    username: string;
-    password: string;
-  }
+  // interface SignInValues {
+  //   username: string;
+  //   password: string;
+  // }
 
   const navigate = useNavigate();
   const instance = axios.create({
-    // baseURL: 'http://localhost:3001/api',
     baseURL: `${SERVER_URL}`,
     withCredentials: true,
   });
@@ -43,14 +42,13 @@ export default function Auth(): JSX.Element {
   }
 
   const onSubmit = async (values: AuthFormValues): Promise<void> => {
-    console.log(values);
     try {
       const response = isSignIn
-        ? await instance.post('/api/login', {
+        ? await instance.post('/login', {
             email: values.email,
             password: values.password,
           })
-        : await instance.post('/api/register', {
+        : await instance.post('/register', {
             username: values.username,
             email: values.email,
             password: values.password,
@@ -104,25 +102,25 @@ export default function Auth(): JSX.Element {
               />
             </div>
             <Form>
-              {isSignIn ? null : (
-                <div>
-                  <label>Username: </label>
-                  <Field
-                    type="text"
-                    name="username"
-                    value={values.username}
-                    onChange={handleChange}
-                  />
-                </div>
-              )}
-
-              <label>Email: </label>
+              <label>Username: </label>
               <Field
                 type="text"
-                name="email"
-                value={values.email}
+                name="username"
+                value={values.username}
                 onChange={handleChange}
               />
+
+              {isSignIn ? null : (
+                <>
+                  <label>Email: </label>
+                  <Field
+                    type="text"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                  />
+                </>
+              )}
 
               <label>Password: </label>
               <Field

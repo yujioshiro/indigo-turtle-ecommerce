@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import '@prisma/client';
 import { type } from 'os';
-import { type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { To } from 'react-router-dom';
 
 interface User {
