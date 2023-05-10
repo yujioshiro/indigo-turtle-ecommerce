@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import store, { selectUser, auth, logout } from '../../store';
 import type { UserState } from '../../store';
+import { SERVER_URL } from '../../config';
 
 export default function Auth(): JSX.Element {
   const userInfo = useSelector(selectUser);
@@ -13,22 +14,22 @@ export default function Auth(): JSX.Element {
   const dispatch = useDispatch();
   const [isSignIn, setIsSignIn] = useState<boolean>(true);
 
-  interface SignUpValues {
-    username: string;
-    email: string;
-    password: string;
-    passwordConfirm: string;
-    address: string;
-  }
+  // interface SignUpValues {
+  //   username: string;
+  //   email: string;
+  //   password: string;
+  //   passwordConfirm: string;
+  //   address: string;
+  // }
 
-  interface SignInValues {
-    username: string;
-    password: string;
-  }
+  // interface SignInValues {
+  //   username: string;
+  //   password: string;
+  // }
 
   const navigate = useNavigate();
   const instance = axios.create({
-    baseURL: 'http://localhost:3001/api',
+    baseURL: `${SERVER_URL}`,
     withCredentials: true,
   });
 
@@ -55,7 +56,11 @@ export default function Auth(): JSX.Element {
             address: values.address,
           });
 
-      const payload: UserState = { username: response.data.username };
+      const payload: UserState = {
+        id: response.data.id,
+        username: response.data.username,
+        email: response.data.email,
+      };
       dispatch(auth(payload));
 
       console.log('User registered successfully');

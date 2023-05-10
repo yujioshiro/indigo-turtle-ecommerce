@@ -42,7 +42,7 @@ const CartLink = ({
 }): JSX.Element => {
   const cart = useSelector(selectCart);
   const user = useSelector(selectUser);
-  if (user === '') {
+  if (user.username === '') {
     console.error('User not defined while initializing CartLink component.');
     return <></>;
   }
@@ -57,7 +57,9 @@ const CartLink = ({
 
   const cartClicked = (): void => {
     (async (): Promise<void> => {
+      console.log(SERVER_URL);
       const url = await getCheckout();
+      console.log(url);
       window.open(url);
     })().catch((err) => {
       console.error(err);
@@ -65,7 +67,12 @@ const CartLink = ({
   };
 
   return (
-    <button onClick={() => getCheckout} className={className}>
+    <button
+      onClick={() => {
+        cartClicked();
+      }}
+      className={className}
+    >
       <span>{cartProps.icon}</span>
       <span>{cartProps.name}</span>
       <span>{cart.length}</span>
@@ -75,7 +82,7 @@ const CartLink = ({
 
 export const NavList = (props: NavItems) => {
   const navigate = useNavigate();
-  const username = useSelector(selectUser);
+  const user = useSelector(selectUser);
   const NAVLINK_CLASS =
     'inline-flex items-center gap-2 duration-150 hover:text-secondary-light';
   const USERNAME_CLASS = 'inline-flex items-center duration-150 text-xl';
@@ -98,7 +105,7 @@ export const NavList = (props: NavItems) => {
           </NavLink>
         )
       )}
-      {username === '' ? (
+      {user.username === '' ? (
         <span
           className={LOGIN_CLASS}
           onClick={() => {
@@ -108,7 +115,7 @@ export const NavList = (props: NavItems) => {
           Login
         </span>
       ) : (
-        <span className={USERNAME_CLASS}>{username}</span>
+        <span className={USERNAME_CLASS}>{user.username}</span>
       )}
     </div>
   );
