@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-<<<<<<< HEAD
-import {selectCart} from '../../store'
-=======
 import store, { selectUser, selectCart } from '../../store';
->>>>>>> 1277bd02188cab318c7022e7f20bc16bc53c9a65
 import productService from '../../services/productService';
 import { setProducts } from '../../reducers/productReducer';
 import { Link } from 'react-router-dom';

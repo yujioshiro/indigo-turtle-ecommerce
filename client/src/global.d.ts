@@ -13,11 +13,7 @@ interface User {
   address?: string;
 }
 
-<<<<<<< HEAD
-interface Product  {
-=======
 interface Product {
->>>>>>> 1277bd02188cab318c7022e7f20bc16bc53c9a65
   id?: number;
   name: string;
   description: string | null;

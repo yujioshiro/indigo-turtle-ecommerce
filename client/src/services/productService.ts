@@ -1,8 +1,9 @@
 import axios from 'axios';
 import type { Product } from '../types';
+import { SERVER_URL } from '../config';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3001/api', // TODO: add it in env variables
+  baseURL: `${SERVER_URL}/api`, // TODO: add it in env variables
   withCredentials: true,
 });
 

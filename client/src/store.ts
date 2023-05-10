@@ -1,27 +1,13 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-<<<<<<< HEAD
-import type {PayloadAction} from '@reduxjs/toolkit';
-import type { Product } from './global';
-=======
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { type Product } from './global';
->>>>>>> 1277bd02188cab318c7022e7f20bc16bc53c9a65
+import type { Product } from './global';
 
 export interface UserState {
-  id: string,
-  username: string,
-  email: string,
+  id: string;
+  username: string;
+  email: string;
 }
 
-<<<<<<< HEAD
-const initialState:UserState = {
-  id: '',
-  username: '',
-  email: ''
-}
-
-=======
->>>>>>> 1277bd02188cab318c7022e7f20bc16bc53c9a65
 interface ProductSliceState {
   Products: Product[];
 }
@@ -31,7 +17,9 @@ type RootState = ReturnType<typeof store.getState>;
 /* State */
 
 const initialState: UserState = {
+  id: '',
   username: '',
+  email: '',
 };
 
 const productInititalState: ProductSliceState = {
@@ -84,13 +72,8 @@ const store = configureStore({
   },
 });
 
-export const selectUser = (state: RootState): string => state.user.username;
-
-<<<<<<< HEAD
 export const selectUser = (state: RootState): UserState => state.user;
 
-=======
->>>>>>> 1277bd02188cab318c7022e7f20bc16bc53c9a65
 export const selectCart = (state: RootState): Product[] => state.cart.Products;
 
 export default store;
