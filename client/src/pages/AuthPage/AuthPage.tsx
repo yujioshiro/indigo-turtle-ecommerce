@@ -43,14 +43,13 @@ export default function Auth(): JSX.Element {
   }
 
   const onSubmit = async (values: AuthFormValues): Promise<void> => {
-    console.log(values);
     try {
       const response = isSignIn
-        ? await instance.post('/api/login', {
+        ? await instance.post('/login', {
             email: values.email,
             password: values.password,
           })
-        : await instance.post('/api/register', {
+        : await instance.post('/register', {
             username: values.username,
             email: values.email,
             password: values.password,
@@ -156,8 +155,11 @@ export default function Auth(): JSX.Element {
                 </>
               )}
 
-              <div className="submit">
-                <input type="submit" />
+              <div className="submit group">
+                <input
+                  type="submit"
+                  className="group-hover:text-neutral-white group-hover:bg-background-color"
+                />
               </div>
             </Form>
           </div>
