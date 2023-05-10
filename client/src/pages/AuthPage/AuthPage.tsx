@@ -154,8 +154,11 @@ export default function Auth(): JSX.Element {
                 </>
               )}
 
-              <div className="submit">
-                <input type="submit" />
+              <div className="submit group">
+                <input
+                  type="submit"
+                  className="group-hover:text-neutral-white group-hover:bg-background-color"
+                />
               </div>
             </Form>
           </div>
